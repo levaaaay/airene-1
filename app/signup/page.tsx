@@ -108,7 +108,7 @@ const Signup = () => {
           type="submit"
           className="w-full py-3 px-4 mb-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 transition duration-200"
         >
-          Sign In
+          Create Account
         </button>
 
         {/* Sign In with Google Button */}
