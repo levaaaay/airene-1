@@ -5,19 +5,26 @@ import Image from 'next/image'
 import meralcoImage from "@/assets/meralco.svg"
 import googleImage from "@/assets/gmail.svg"
 import Link from 'next/link'
+import { useRouter } from 'next/router'  // Import the useRouter hook
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
+  const [showConfPassword, setShowConfPassword] = useState(false)
+  const router = useRouter()  // Initialize the router
 
   // Toggle password visibility
   const togglePassword = () => {
     setShowPassword(!showPassword)
   }
 
-  // Handle checkbox change
-  const handleRememberMeChange = () => {
-    setRememberMe(!rememberMe)
+  const toggleConfPassword = () => {
+    setShowConfPassword(!showConfPassword)
+  }
+
+  // Handle create account button click
+  const handleCreateAccount = () => {
+    // Redirect to the /personaldeets page
+    router.push('/personaldeets')
   }
 
   return (
@@ -82,30 +89,32 @@ const Signup = () => {
           Must be at least 8 characters.
         </div>
 
+        {/* Confirm Password Label and Input Field */}
         <div className="w-full mb-4">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-            Password*
+          <label htmlFor="confPassword" className="block text-sm font-medium text-gray-700 mb-2">
+            Confirm Password*
           </label>
           <div className="relative">
             <input
-              id="password"
-              type={showPassword ? "text" : "password"}
+              id="confPassword"
+              type={showConfPassword ? "text" : "password"}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your password"
+              placeholder="Confirm your password"
             />
             <button
               type="button"
-              onClick={togglePassword}
+              onClick={toggleConfPassword}
               className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500"
             >
-              {showPassword ? 'Hide' : 'Show'}
+              {showConfPassword ? 'Hide' : 'Show'}
             </button>
           </div>
         </div>
 
-        {/* Sign In Button */}
+        {/* Sign Up Button */}
         <button
-          type="submit"
+          type="button"  // Change from submit to button to prevent form submission
+          onClick={handleCreateAccount}  // Trigger the redirection
           className="w-full py-3 px-4 mb-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 transition duration-200"
         >
           Create Account
@@ -120,13 +129,13 @@ const Signup = () => {
           Sign In with Google
         </button>
 
-        {/* Don't have an account? Sign Up Text */}
+        {/* Already have an account? Login Text */}
         <div className="flex items-center justify-center mt-4">
           <div className="text-sm text-[#535862]">
-            Don't have an account? 
+            Already have an account?
           </div>
-          <Link href="/signup" className="text-orange-500 hover:underline ml-1">
-            Sign Up
+          <Link href="/" className="text-orange-500 hover:underline ml-1">
+            Login
           </Link>
         </div>
       </div>
