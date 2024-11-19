@@ -4,11 +4,13 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import meralcoImage from "@/assets/meralco.svg"
 import googleImage from "@/assets/gmail.svg"
+import { useRouter } from 'next/navigation';  // Importing useRouter hook
 import Link from 'next/link'
 
 const page = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
+  const router = useRouter();  // Creating a router instance
 
   // Toggle password visibility
   const togglePassword = () => {
@@ -18,6 +20,14 @@ const page = () => {
   // Handle checkbox change
   const handleRememberMeChange = () => {
     setRememberMe(!rememberMe)
+  }
+
+  // Handle sign-in click
+  const handleSignIn = () => {
+    // Logic for sign-in (validation, etc.)
+
+    // Redirect to /convo page upon successful sign-in
+    router.push('/convo');  // Navigate to the Convo page
   }
 
   return (
@@ -76,7 +86,6 @@ const page = () => {
 
         {/* Remember Me Checkbox */}
         <div className="flex justify-between items-center w-full mb-6">
-          {/* "Remember Me" Checkbox */}
           <div className="flex items-center">
             <input
               id="rememberMe"
@@ -89,17 +98,21 @@ const page = () => {
               Remember me
             </label>
           </div>
-          {/* "Forgot Password?" Link */}
           <a href="#" className="text-sm text-orange-500 hover:underline">
             Forgot password?
           </a>
         </div>
+
+        {/* Sign In Button */}
         <button
-          type="submit"
+          type="button"
+          onClick={handleSignIn}  // Trigger the handleSignIn function
           className="w-full py-3 px-4 mb-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 transition duration-200"
         >
           Sign In
         </button>
+
+        {/* Google Sign In Button */}
         <button
           type="button"
           className="w-full py-3 px-4 bg-white border border-gray-300 rounded-lg flex items-center justify-center text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
@@ -107,13 +120,15 @@ const page = () => {
           <Image src={googleImage} className="mr-2 text-xl" alt="google image"/>
           Sign In with Google
         </button>
-        <div className='flex justify-center'>
-        <div className='flex justify-center text-base pt-4 text-[#535862]'>
-          Don't have an account? 
-        </div>
-        <Link href="/signup" className='flex justify-center text-base pt-4 text-orange-500 pl-1'>
-          Sign up
-        </Link>
+
+        {/* Sign Up Link Section */}
+        <div className="flex justify-center">
+          <div className="flex justify-center text-base pt-4 text-[#535862]">
+            Don't have an account? 
+          </div>
+          <Link href="/signup" className="flex justify-center text-base pt-4 text-orange-500 pl-1">
+            Sign up
+          </Link>
         </div>
       </div>
     </div>

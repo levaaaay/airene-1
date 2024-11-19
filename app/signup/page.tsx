@@ -5,12 +5,10 @@ import Image from 'next/image'
 import meralcoImage from "@/assets/meralco.svg"
 import googleImage from "@/assets/gmail.svg"
 import Link from 'next/link'
-import { useRouter } from 'next/router'  // Import the useRouter hook
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfPassword, setShowConfPassword] = useState(false)
-  const router = useRouter()  // Initialize the router
 
   // Toggle password visibility
   const togglePassword = () => {
@@ -19,12 +17,6 @@ const Signup = () => {
 
   const toggleConfPassword = () => {
     setShowConfPassword(!showConfPassword)
-  }
-
-  // Handle create account button click
-  const handleCreateAccount = () => {
-    // Redirect to the /personaldeets page
-    router.push('/personaldeets')
   }
 
   return (
@@ -114,7 +106,6 @@ const Signup = () => {
         {/* Sign Up Button */}
         <button
           type="button"  // Change from submit to button to prevent form submission
-          onClick={handleCreateAccount}  // Trigger the redirection
           className="w-full py-3 px-4 mb-4 bg-orange-500 text-white rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 transition duration-200"
         >
           Create Account
